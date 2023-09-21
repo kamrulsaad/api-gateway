@@ -2,11 +2,12 @@ import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import * as fs from 'fs';
 import { ICloudinaryResponse, IUploadFile } from '../interfaces/file';
+import config from '../config';
 
 cloudinary.config({
-    cloud_name: 'djri0huwq',
-    api_key: '414898822792439',
-    api_secret: 'uJYXgUNZjlxfqi4BE_0K_7k5i_I'
+    cloud_name: config.cloudinary.name,
+    api_key: config.cloudinary.key,
+    api_secret: config.cloudinary.secret
 });
 
 const storage = multer.diskStorage({
@@ -20,10 +21,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const uploadToCloudinary = async (file: IUploadFile) : Promise<ICloudinaryResponse > => {
+const uploadToCloudinary = async (file: IUploadFile): Promise<ICloudinaryResponse> => {
     return new Promise((resolve, reject) => {
-        cloudinary.uploader.upload(file.path, 
-            (error : Error, result: ICloudinaryResponse) => {
+        cloudinary.uploader.upload(file.path, (error: Error, result: ICloudinaryResponse) => {
             fs.unlinkSync(file.path);
             if (error) {
                 reject(error);
