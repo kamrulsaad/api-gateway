@@ -73,7 +73,7 @@ const createFaculty = async (req: Request): Promise<IGenericResponse> => {
     }
 
     const academicFacultyResponse: IGenericResponse = await AuthService.get(
-        `/academic-faculty?syncId=${academicFaculty}`
+        `/academic-faculties?syncId=${academicFaculty}`
     );
 
     if (academicFacultyResponse.data && Array.isArray(academicFacultyResponse.data)) {

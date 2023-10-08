@@ -13,5 +13,6 @@ export const AcademicSemesterMonths: string[] = [
     'August',
     'September',
     'October',
-    'November'
+    'November',
+    'December'
 ];
